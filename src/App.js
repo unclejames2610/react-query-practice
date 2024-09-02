@@ -10,7 +10,11 @@ function App() {
   const queryClient = useQueryClient();
   const postsQuery = useQuery({
     queryKey: ["posts"],
-    queryFn: () => wait(1000).then(() => [...POSTS]),
+    queryFn: (obj) =>
+      wait(1000).then(() => {
+        console.log(obj);
+        return [...POSTS];
+      }),
     // queryFn: () => Promise.reject("Error Message"),
   });
 
