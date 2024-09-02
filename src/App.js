@@ -10,7 +10,11 @@ function App() {
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: () => wait(1000).then(() => [...POSTS]),
+    // queryFn: () => Promise.reject("Error Message"),
   });
+
+  if (postsQuery.isLoading) return <h1>Loading...</h1>;
+  if (postsQuery.isError) return <pre>{JSON.stringify(postsQuery.error)}</pre>;
   return <h1>TanStack Query</h1>;
 }
 
